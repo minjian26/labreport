@@ -57,8 +57,8 @@
 	<pre><code class="language-python">
 	# Module 1: Intro to Turtle Graphics
         # Drawing a Simple Square with Turtle Graphics
-	from turtle_setup import # First, it needs to installs the turtle library.	
-	initializeTurtle()   # Then, it follows initializing turle to start coding.
+	from turtle_setup import 	
+	initializeTurtle()   
 	showturtle()
         color('blue')
         bgcolor('white')
@@ -69,6 +69,23 @@
 	forward(100)
 	show()
         <img src="Screenshot-Turtle moves forwar and jump.png">
+
+
+
+
+
+        jump(200, 200) # Adjust these values as needed to center the square
+        face(0) # Ensure the turtle is facing up
+
+        forward(100)
+        right(90)
+        show()
+
+        # Draw a simple square
+        for _ in range(4):
+        forward(100)
+        right(90)
+        show()
 
 
 
