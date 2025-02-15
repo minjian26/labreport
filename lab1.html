@@ -41,7 +41,7 @@
           and patterns by adjusting the initial position and angles. In addition, by importing 
           the loop codes, speicial patterns are present depending on setting the initial  
 	  point and angle. Also, it can iterate different shapes. I try and test with different
-	  parameters with the same codes. It comes out different results.
+	  parameters with the codes. It comes out different results.
 	  
         </p>
       </section>
@@ -62,28 +62,21 @@
         color('blue')
         bgcolor('white')
 		
-	jump(200, 200)
-	face(0)      
+	jump(200, 200) # Adjust these values as needed to center the square
+	face(0) # Ensure the turtle is facing up     
 
-	forward(100)
-	show()
-        <img src="https://github.com/minjian26/labreport/blob/main/Screenshot-Turtle%20moves%20forwar%20and%20jump.png">
-
+	forward(100) #Heading 100 virtically. 
+	show() 
 
 
-
-
-        jump(200, 200) # Adjust these values as needed to center the square
-        face(0) # Ensure the turtle is facing up
-
-        forward(100)
-        right(90)
-        show()
+    forward(100)
+    right(90) # The turtle turns to the 90 degrees.
+    show()
 
     # Draw a simple square
-    for _ in range(4):
-    forward(100)
-    right(90)
+    for _ in range(4): # For loop repeating 4 times
+    forward(100) 
+    right(90) # Different shapes or patterns with different angle.
     show()
 
 
