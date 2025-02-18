@@ -119,7 +119,53 @@
             height="400"
             loading="lazy"
           />
-          
+
+         <pre><code_class='language python'>
+# Step 1: Initialize the turtle canvas
+canvas_width = 1000
+canvas_height = 800
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+# Step 2: Set up helper functions for random colors and drawing polygons
+
+import random
+import math
+
+# Function to generate a random color in RGB format
+def random_color():
+    r = random.random()
+    g = random.random()
+    b = random.random()
+    return color_rgb(r, g, b)
+
+# Function to draw a polygon with 'n_sides' and the given 'side_length'
+def draw_polygon(n_sides, side_length):
+    angle = 360 / n_sides  # Calculate the internal angle of the polygon
+    for _ in range(n_sides):
+        forward(side_length)
+        right(angle)
+
+# Step 3: Draw a horizontal line of polygons, increasing the number of sides from 3 to 50
+
+# Starting position for the line of polygons (positive coordinates, on-screen)
+start_x = 100  # Start at x = 200 (positive)
+start_y = 300  # Start at y = 300 (positive, going down the canvas)
+jump(start_x, start_y)  # Move the turtle to the starting point
+
+side_length = 20  # Length of each side of the polygon
+spacing = 25  # Spacing between each polygon
+
+for n_sides in range(3, 20):
+    color(random_color())  # Set a random color for each polygon
+    draw_polygon(n_sides, side_length)  # Draw the polygon with n sides
+    penup()  # Stop drawing when moving to the next position
+    jump(getx() + spacing + side_length, start_y)  # Move to the right for the next polygon
+    pendown()  # Start drawing again
+
+# Step 4: Display the result
+show()
+	 
+	 </code_class></pre>
 
 
 
