@@ -67,7 +67,7 @@
 	 Then, it initialize the background of the turtle canvas so that it won't go beyond the boundary.
 	 Next, it is to define a function "random walk" with steps and step length. The "jump" is to set
 	 the initial position with certain speed. The for loop is to repeat the steps with the forward and 
-         right direction. Last, it executes the function "random_walk" with certain steps and step_length.
+         right direction. Last, it executes the function "random_walk" with adjust steps and step_length.
 	 When I run the codes with different times, it shows different curves as it imports random curves 
 	 at the beginning. 
         </p>
@@ -89,15 +89,36 @@ def random_walk(steps, step_length):
         right(random.uniform(-180, 180))   # Turn by a random angle between -180 and 180 degrees
 
 steps = 1000
-step_length = 10
+step_length = 10 #space between the current and the following steps.
 
 random_walk(steps, step_length)
 
 show()
 	</code></pre>
+	<p>
 
+		
+	</p>
+	<section id="code">
+	<pre><code class="language-python">
+initializeTurtle()
+showturtle()
 
+jump(50, 400)
+face(90)
 
+# Line with blip
+forward(800 / 3)
+left(60)
+forward(800 / 3)
+right(120)
+forward(800 / 3)
+left(60)
+forward(800 / 3)
+
+show()
+</code></pre>
+		
         <figure>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/800px-Mandel_zoom_00_mandelbrot_set.jpg"
