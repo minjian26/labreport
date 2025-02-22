@@ -119,6 +119,42 @@ forward(800 / 3)
 
 show()
 </code></pre>
+
+	<p>
+
+		
+	</p>
+	<section id="code">
+	<pre><code class="language-python">
+# Define the blip_line function
+def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+        right(120)
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+
+
+initializeTurtle()
+
+# Draw blip lines of different orders
+jump(50, 400)
+face(90)
+color('red')
+blip_line(800, 1)  # Order 1
+
+jump(50, 350)
+face(90)
+color('blue')
+blip_line(800, 2)  # Order 2
+
+show()
+</code></pre>
 		
         <figure>
           <img
