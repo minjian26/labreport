@@ -60,38 +60,37 @@
       <!-- -------------------------------------------------------------------------------------------- -->
       <section id="results">
       
-      
         <h2>Results &amp; Analysis</h2>
         <p>
-          First, I explore the codes to draw a random curve. The codes are attached below.
+          First, I explore the codes to draw a random curve. The codes are attached below. Except drawing
+	 specific curves, then it starts the codes with "import random" to import random curves or shapes.
+	 Then, it initialize the background of the turtle canvas so that it won't go beyond the boundary.
+	 Next, it is to define a function "random walk" with steps and step length. The "jump" is to set
+	 the initial position with certain speed. The for loop is to repeat the steps with the forward and 
+         right direction. Last, it executes the function "random_walk" with certain steps and step_length.
         </p>
-<section id="code">
+	<section id="code">
 	<pre><code class="language-python">
 import random
-
-# Step 1: Initialize the turtle canvas
 canvas_width = 1000
 canvas_height = 800
 initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
 
-# Step 2: Function to perform a random walk (Brownian motion)
 def random_walk(steps, step_length):
-    speed(0)             # Set speed to maximum for faster drawing
+    speed(0)          
     penup()
-    jump(450, 450)       # Start near the middle of the canvas
+    jump(450, 450)     
     pendown()
 
     for _ in range(steps):
-        forward(step_length)               # Move forward by the step length
+        forward(step_length)              
         right(random.uniform(-180, 180))   # Turn by a random angle between -180 and 180 degrees
 
-# Step 3: Execute the random walk with increased steps and/or step length
 steps = 1000
 step_length = 10
 
 random_walk(steps, step_length)
 
-# Step 4: Display the result
 show()
 	</code></pre>
 
