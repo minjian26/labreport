@@ -49,25 +49,6 @@
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
-	<pre><code class="language-python">
-	# This is just a sample Python code block
-	# demonstrating how code might be displayed.
-
-	import numpy as np
-	import matplotlib.pyplot as plt
-
-	x = np.linspace(-10, 10, 100)
-	y = 2*x + 5
-
-	plt.plot(x, y)
-	plt.title("Sample Plot")
-	plt.show()
-	</code></pre>
-
-
-
-
 
 
       </section>
@@ -82,12 +63,37 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-          In this placeholder section, you might describe observations,
-          results, or insights gained from any analysis. You can incorporate 
-          references to equations (e.g., $y = mx + b$) or embed images and 
-          other visual aids to illustrate your points.
+          First, I explore the codes to draw a random curve. The codes are attached below.
         </p>
+<section id="code">
+	<pre><code class="language-python">
+import random
 
+# Step 1: Initialize the turtle canvas
+canvas_width = 1000
+canvas_height = 800
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+# Step 2: Function to perform a random walk (Brownian motion)
+def random_walk(steps, step_length):
+    speed(0)             # Set speed to maximum for faster drawing
+    penup()
+    jump(450, 450)       # Start near the middle of the canvas
+    pendown()
+
+    for _ in range(steps):
+        forward(step_length)               # Move forward by the step length
+        right(random.uniform(-180, 180))   # Turn by a random angle between -180 and 180 degrees
+
+# Step 3: Execute the random walk with increased steps and/or step length
+steps = 1000
+step_length = 10
+
+random_walk(steps, step_length)
+
+# Step 4: Display the result
+show()
+	</code></pre>
 
 
 
