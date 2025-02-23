@@ -123,9 +123,9 @@ show()
 	<p>
 	Third, it is going to explore how to draw a blip line. It starts with defining a function with order and length,
 		introducing "if...else...", if order is zero, it will move the turtle forward by lengths. Then, it set two 
-                lines with different color, starting points and orders in case that two lines are overlapped. 
-	
-		
+                lines with different color, starting points and orders in case that two lines are overlapped. I adjust the
+		parameters of jump. I set the same parameters for the two blip lines. The two lines turn out to start at the same 
+		point. By adjusting the angle of "face," two lines go different direction.
 	</p>
 	<section id="code">
 	<pre><code class="language-python">
@@ -151,8 +151,8 @@ face(90)
 color('red')
 blip_line(800, 1)  # Order 1
 
-jump(50, 350)
-face(90)
+jump(50, 400)
+face(70)
 color('blue')
 blip_line(800, 2)  # Order 2
 
