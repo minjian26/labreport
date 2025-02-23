@@ -95,10 +95,13 @@ random_walk(steps, step_length)
 
 show()
 	</code></pre>
+	
 	<p>
 	Second, it introduces how to use turtle graphices to draw a simple curve. It initializes the first position.
-	Then, it continues to graph using "forward" with length, "left" and "right" with angle turn. At last, it 
-	shows the curve with specific parameters. 
+	The function of "face" with 90 degree means that the turtle go horizontally, while facing with 0 degree means
+	it goes vertically. Then, it continues to graph using "forward" with length, "left" and "right" with angle turn. At last, it 
+	shows the curve with specific parameters. I adjust the code "forward" to "backward." It shows different curve
+	that the turtle going backward. 
 	</p>
 	<section id="code">
 	<pre><code class="language-python">
@@ -115,11 +118,20 @@ forward(800 / 3)
 right(120)
 forward(800 / 3)
 left(60)
-forward(800 / 3)
+backward(800 / 3)
 
 show()
 </code></pre>
 
+	<figure>
+          <img
+            src=""
+	    alt="One blip-line"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
 	<p>
 	Third, it is going to explore how to draw a blip line. It starts with defining a function with order and length,
 		introducing "if...else...", if order is zero, it will move the turtle forward by lengths. Then, it set two 
