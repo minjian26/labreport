@@ -62,36 +62,30 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-          First, I explore the codes to draw a random curve. The codes are attached below. Except drawing
-	 specific curves, then it starts the codes with "import random" to import random curves or shapes.
-	 Then, it initialize the background of the turtle canvas so that it won't go beyond the boundary.
-	 Next, it is to define a function "random walk" with steps and step length. The "jump" is to set
-	 the initial position with certain speed. The for loop is to repeat the steps with the forward and 
-         right direction. Last, it executes the function "random_walk" with adjust steps and step_length.
-	 When I run the codes with different times, it shows different curves as it imports random curves 
-	 at the beginning. 
+          First, it needs to initialize the turtle. Then, it define the function to draw an euquilatral triangle
+	with the "for" loop with running 3 times since a triangle has three sides. The underscore _ is used as a throwaway variable
+	as we don't need to use its value. The forward (length) is to move the turtle forward by the specified distance (length),
+	drawing one side of the triangle. The left(120) is to rotate the turtle left by 120 degrees after drwaing each side. It is 
+	because in and equilateral triangle, each exterior angle is 120 degrees, so this ensures that after drawing three sides, the 
+		turtle returns to its starting position.
         </p>
 	<section id="code">
 	<pre><code class="language-python">
-import random
-canvas_width = 1000
-canvas_height = 800
-initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+initializeTurtle()
+showturtle()
 
-def random_walk(steps, step_length):
-    speed(0)          
-    penup()
-    jump(450, 450)     
-    pendown()
+# Define the function to draw an equilateral triangle
+def draw_triangle(length):
+    for _ in range(3):
+        forward(length)
+        left(120)
 
-    for _ in range(steps):
-        forward(step_length)              
-        right(random.uniform(-180, 180))   # Turn by a random angle between -180 and 180 degrees
-
-steps = 1000
-step_length = 10 #space between the current and the following steps.
-
-random_walk(steps, step_length)
+# Set up the turtle
+jump(300, 500)
+face(90)
+color('green')
+length = 400
+draw_triangle(length)
 
 show()
 	</code></pre>
