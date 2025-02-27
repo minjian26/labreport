@@ -1,0 +1,277 @@
+<!-- INTRODUCTION SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<html>
+<head> <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="stylesheet" href="https://latex.vercel.app/style.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"/><script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+
+<title>Fractal Geometry Lab Report</title>
+
+</head>
+	
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry Lab Report</h1>
+    <p class="author">
+      [Minjian You] <br />
+      [Feburary 4, 2025]
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          In this modules, I learn how to draw fractal curves by importing turtle library. I learn how to use
+	codes to graph different curves. I can use "if....else.." function to draw more than two curves in the 
+	same canvas at the same time. Also, the "for loop" can be used to draw some close shapes. There are various
+	shapes can be created using different codes with different parameters. 
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+
+
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+          First, I explore the codes to draw a random curve. The codes are attached below. Except drawing
+	 specific curves, then it starts the codes with "import random" to import random curves or shapes.
+	 Then, it initialize the background of the turtle canvas so that it won't go beyond the boundary.
+	 Next, it is to define a function "random walk" with steps and step length. The "jump" is to set
+	 the initial position with certain speed. The for loop is to repeat the steps with the forward and 
+         right direction. Last, it executes the function "random_walk" with adjust steps and step_length.
+	 When I run the codes with different times, it shows different curves as it imports random curves 
+	 at the beginning. 
+        </p>
+	<section id="code">
+	<pre><code class="language-python">
+import random
+canvas_width = 1000
+canvas_height = 800
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+def random_walk(steps, step_length):
+    speed(0)          
+    penup()
+    jump(450, 450)     
+    pendown()
+
+    for _ in range(steps):
+        forward(step_length)              
+        right(random.uniform(-180, 180))   # Turn by a random angle between -180 and 180 degrees
+
+steps = 1000
+step_length = 10 #space between the current and the following steps.
+
+random_walk(steps, step_length)
+
+show()
+	</code></pre>
+	<figure>
+          <img
+            src="Screenshot random curve.png"
+	    alt="random curve"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+
+		
+	<p>
+	Second, it introduces how to use turtle graphices to draw a simple curve. It initializes the first position.
+	The function of "face" with 90 degree means that the turtle go horizontally, while facing with 0 degree means
+	it goes vertically. Then, it continues to graph using "forward" with length, "left" and "right" with angle turn. At last, it 
+	shows the curve with specific parameters. I adjust the code "forward" to "backward." It shows different curve
+	that the turtle going backward. 
+	</p>
+	<section id="code">
+	<pre><code class="language-python">
+initializeTurtle()
+showturtle()
+
+jump(50, 400)
+face(90)
+
+# Line with blip
+forward(800 / 3)
+left(60)
+forward(800 / 3)
+right(120)
+forward(800 / 3)
+left(60)
+backward(800 / 3)
+
+show()
+</code></pre>
+
+	<figure>
+          <img
+            src="Screenshot simple line with blip.png"
+	    alt="One blip-line"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+		
+	<p>
+	Third, it is going to explore how to draw a blip line. It starts with defining a function with order and length,
+		introducing "if...else...", if order is zero, it will move the turtle forward by lengths. Then, it set two 
+                lines with different color, starting points and orders in case that two lines are overlapped. I adjust the
+		parameters of jump. I set the same parameters for the two blip lines. The two lines turn out to start at the same 
+		point. By adjusting the angle of "face," two lines go different direction.
+	</p>
+	<section id="code">
+	<pre><code class="language-python">
+# Define the blip_line function
+def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+        right(120)
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+
+
+initializeTurtle()
+
+# Draw blip lines of different orders
+jump(50, 400)
+face(90)
+color('red')
+blip_line(800, 1)  # Order 1
+
+jump(50, 400)
+face(70)
+color('blue')
+blip_line(800, 2)  # Order 2
+
+show()
+</code></pre>
+		
+        <figure>
+          <img
+            src="Screenshot blip-line.png"
+	    alt="blip-line"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+	<p>
+	 Next, to draw a closed curve, based on the above codes, it can be used recurrsive function. If order==0,
+	 it draws astraight line. Otherwise, it recursively breaks the segment into smaller parts and angel parts
+	 and angles to form the Koch curve. blip_line () repeats three times to form an euilateral triangle with Koch 
+	 edges. 
+		
+	</p>
+	<section id="code">
+	<pre><code class="language-python">
+initializeTurtle()
+showturtle()
+
+# Define the blip_line function (Koch curve)
+def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+        right(120)
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+
+# Draw the Koch snowflake
+def koch_snowflake(length, order):
+    for _ in range(3):
+        blip_line(length, order)
+        right(120)
+
+# Set up the turtle
+jump(250, 500)
+face(0)
+color('blue')
+
+# Draw the snowflake
+length = 200 #increased size for better visibility.
+order = 3
+koch_snowflake(length, order)
+
+show()
+	</code></pre>
+<figure>
+          <img
+            src="Screenshot Koch snowflake.png"
+	    alt="Koch snowflake.png"
+           
+          />
+        </figure>
+
+      </section>
+
+
+
+      <!-- CONCLUSION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          In this module, I learn how to graph curves using turtle library with colab. It can be used defining
+	  a function and a loop to draw a simple, random or complehensive curve. Under the same code, it shows
+	  different curves with different parameters. I am fascinated those beautiful patterns and curves. There
+	  are different approaches and thought to graph the same curves. 
+	</p>
+      </section>
+
+     
+     
+     
+   
+     
+     
+     
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
