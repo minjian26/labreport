@@ -7,5 +7,7 @@ Lab 1: https://minjian26.github.io/labreport/lab1.html
 
 Lab 2: https://minjian26.github.io/labreport/lab2.html
 
+Lab 3: https://minjian26.github.io/labreport/lab3.html
+
 # Notes
 Hello World
