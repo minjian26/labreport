@@ -102,28 +102,26 @@ show()
 
 		
 	<p>
-	Second, it introduces how to use turtle graphices to draw a simple curve. It initializes the first position.
-	The function of "face" with 90 degree means that the turtle go horizontally, while facing with 0 degree means
-	it goes vertically. Then, it continues to graph using "forward" with length, "left" and "right" with angle turn. At last, it 
-	shows the curve with specific parameters. I adjust the code "forward" to "backward." It shows different curve
-	that the turtle going backward. 
+	Second, I learn how to graph a Sierpinski triangle.
 	</p>
 	<section id="code">
 	<pre><code class="language-python">
-initializeTurtle()
-showturtle()
-
-jump(50, 400)
-face(90)
-
-# Line with blip
-forward(800 / 3)
-left(60)
-forward(800 / 3)
-right(120)
-forward(800 / 3)
-left(60)
-backward(800 / 3)
+# Define the recursive Sierpinski triangle function
+def sierpinski_triangle(length, order):
+    if order == 0:
+        draw_triangle(length)
+    else:
+        sierpinski_triangle(length / 2, order - 1)
+        forward(length / 2)
+        sierpinski_triangle(length / 2, order - 1)
+        backward(length / 2)
+        left(60)
+        forward(length / 2)
+        right(60)
+        sierpinski_triangle(length / 2, order - 1)
+        left(60)
+        backward(length / 2)
+        right(60)
 
 show()
 </code></pre>
