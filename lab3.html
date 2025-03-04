@@ -232,60 +232,6 @@ def CA(X):
           />
         </figure>
 
-	<p>
-	 Next, to draw a closed curve, based on the above codes, it can be used recurrsive function. If order==0,
-	 it draws astraight line. Otherwise, it recursively breaks the segment into smaller parts and angel parts
-	 and angles to form the Koch curve. blip_line () repeats three times to form an euilateral triangle with Koch 
-	 edges. 
-		
-	</p>
-	<section id="code">
-	<pre><code class="language-python">
-initializeTurtle()
-showturtle()
-
-# Define the blip_line function (Koch curve)
-def blip_line(length, order):
-    if order == 0:
-        forward(length)
-    else:
-        blip_line(length / 3, order - 1)
-        left(60)
-        blip_line(length / 3, order - 1)
-        right(120)
-        blip_line(length / 3, order - 1)
-        left(60)
-        blip_line(length / 3, order - 1)
-
-# Draw the Koch snowflake
-def koch_snowflake(length, order):
-    for _ in range(3):
-        blip_line(length, order)
-        right(120)
-
-# Set up the turtle
-jump(250, 500)
-face(0)
-color('blue')
-
-# Draw the snowflake
-length = 200 #increased size for better visibility.
-order = 3
-koch_snowflake(length, order)
-
-show()
-	</code></pre>
-<figure>
-          <img
-            src="Screenshot Koch snowflake.png"
-	    alt="Koch snowflake.png"
-           
-          />
-        </figure>
-
-      </section>
-
-
 
       <!-- CONCLUSION SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
@@ -295,10 +241,10 @@ show()
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>
-          In this module, I learn how to graph curves using turtle library with colab. It can be used defining
-	  a function and a loop to draw a simple, random or complehensive curve. Under the same code, it shows
-	  different curves with different parameters. I am fascinated those beautiful patterns and curves. There
-	  are different approaches and thought to graph the same curves. 
+          In this module, I learn how to graph the Cellular Automate starting from graphing a equilateral 
+	  triangle and Sierpinski triangle. It uses the similiar concept combining recursive function to 
+	  graph cellular automate with different patterns. I am fascinated those beautiful patterns and curves.
+	  I would like explore more other similiar patterns.
 	</p>
       </section>
 
