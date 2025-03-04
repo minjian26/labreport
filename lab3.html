@@ -67,7 +67,7 @@
 	as we don't need to use its value. The forward (length) is to move the turtle forward by the specified distance (length),
 	drawing one side of the triangle. The left(120) is to rotate the turtle left by 120 degrees after drwaing each side. It is 
 	because in and equilateral triangle, each exterior angle is 120 degrees, so this ensures that after drawing three sides, the 
-		turtle returns to its starting position.
+	turtle returns to its starting position.
         </p>
 	<section id="code">
 	<pre><code class="language-python">
@@ -102,11 +102,15 @@ show()
 
 		
 	<p>
-	Second, I learn how to graph a Sierpinski triangle.
+	Second, I learn how to graph a Sierpinski triangle. It starts with defining the recursive Sierpinski triangle function.
+	If order == 0, it calls draw_triangle(length), which should draw a basic triangle. Otherwise, it recursively calls 
+	itself three times to form the Sierpinski triangle structure. The turtle moves forward and backward, rotating to 
+	correctly position the sub-triangles. Then, initializeTurtle(), showturtle(), jump(), face(), and color('green') 
+	are likely custom functions for setting up the turtle. Next, it draws the Sierpinski triangle. 
 	</p>
 	<section id="code">
 	<pre><code class="language-python">
-# Define the recursive Sierpinski triangle function
+
 def sierpinski_triangle(length, order):
     if order == 0:
         draw_triangle(length)
@@ -123,13 +127,24 @@ def sierpinski_triangle(length, order):
         backward(length / 2)
         right(60)
 
+initializeTurtle()
+showturtle()
+
+jump(300, 500)  # moves the turtle to the starting position.
+face(90)     # sets the turtle direction.   
+color('green')   # color('green') changes the drawing color.
+
+length = 400
+order = 4
+sierpinski_triangle(length, order)
+
 show()
 </code></pre>
 
 	<figure>
           <img
-            src="Screenshot simple line with blip.png"
-	    alt="One blip-line"
+            src=""
+	    alt=" "
             width="600"
             height="400"
             loading="lazy"
