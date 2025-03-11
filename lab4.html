@@ -1,0 +1,263 @@
+<!-- INTRODUCTION SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<html>
+<head> <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="stylesheet" href="https://latex.vercel.app/style.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"/><script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+
+<title>Fractal Geometry Lab Report</title>
+
+</head>
+	
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry Lab Report</h1>
+    <p class="author">
+      [Minjian You] <br />
+      [Feburary 28, 2025]
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          In this modules, I learn how to generating trees with turtles by importing turtle library. 
+          Starting with 
+	a simple equilateral triangle, then I learn how to graph with the Sierpinski triangle, which import recursive
+	function. I also learn how to draw the Cellular Automata which is a discrete model of computation studied in 
+	automata theory. It can be extented to created different type of pattern related to equilateral triangles. 
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+
+
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+        First, it needs to initialize the turtle. Then, it define the function to draw an euquilatral triangle
+	with the "for" loop with running 3 times since a triangle has three sides. The underscore _ is used as a throwaway variable
+	as we don't need to use its value. The forward (length) is to move the turtle forward by the specified distance (length),
+	drawing one side of the triangle. The left(120) is to rotate the turtle left by 120 degrees after drwaing each side. It is 
+	because in and equilateral triangle, each exterior angle is 120 degrees, so this ensures that after drawing three sides, the 
+	turtle returns to its starting position.
+        </p>
+	<section id="code">
+	<pre><code class="language-python">
+initializeTurtle()
+showturtle()
+
+# Define the function to draw an equilateral triangle
+def draw_triangle(length):
+    for _ in range(3):
+        forward(length)
+        left(120)
+
+# Set up the turtle
+jump(300, 500)
+face(90)
+color('green')
+length = 400
+draw_triangle(length)
+
+show()
+	</code></pre>
+	<figure>
+          <img
+            src="Screenshot equilateral triangle.png"
+	    alt="Equilateral triangle"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+
+		
+	<p>
+	Second, I learn how to graph a Sierpinski triangle. It starts with defining the recursive Sierpinski triangle function.
+	If order == 0, it calls draw_triangle(length), which should draw a basic triangle. Otherwise, it recursively calls 
+	itself three times to form the Sierpinski triangle structure. The turtle moves forward and backward, rotating to 
+	correctly position the sub-triangles. Then, initializeTurtle(), showturtle(), jump(), face(), and color('green') 
+	are likely custom functions for setting up the turtle. Next, it draws the Sierpinski triangle. 
+	</p>
+	<section id="code">
+	<pre><code class="language-python">
+
+def sierpinski_triangle(length, order):
+    if order == 0:
+        draw_triangle(length)
+    else:
+        sierpinski_triangle(length / 2, order - 1)
+        forward(length / 2)
+        sierpinski_triangle(length / 2, order - 1)
+        backward(length / 2)
+        left(60)
+        forward(length / 2)
+        right(60)
+        sierpinski_triangle(length / 2, order - 1)
+        left(60)
+        backward(length / 2)
+        right(60)
+
+initializeTurtle()
+showturtle()
+
+jump(300, 500)  # moves the turtle to the starting position.
+face(90)     # sets the turtle direction.   
+color('green')   # color('green') changes the drawing color.
+
+length = 400
+order = 4
+sierpinski_triangle(length, order)
+
+show()
+</code></pre>
+
+	<figure>
+          <img
+            src="Screenshot Sierpinski Triangle.png"
+	    alt="Screenshot Sierpinski Triangle"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+		
+	<p>
+	Third, it is going to explore the Cellular Automata. A cellular automaton (CA) is a collection of 
+	cells arranged in a grid of specified shape, such that each cell changes state as a function of time, 
+	according to a defined set of rules driven by the states of neighboring cells. CAs have been suggested 
+	for possible use in public key cryptography, as well as for applications in geography, anthropology, 
+	political science, sociology and physics, among others. The code is setting up a cellular automaton 
+	grid using NumPy and visualizing it with Matplotlib. Next, it defines the plot function. This function 
+	takes a 2D NumPy array x and plots it. Uses grayscale (cmap='gray'). Hides axis labels. Sets the figure 
+	size to 10x10 inches. Last, Displays the plot. A 100×100 grayscale image where all pixels are black 
+	except for a single white pixel at (0,50). This appears to be a starting setup for a cellular automaton 
+	</p>
+		
+	<section id="code">
+	<pre><code class="language-python">
+# numpy is used for numerical computations and handling the grid.
+# matplotlib.pyplot is used for visualizing the grid.
+import numpy as np 
+import matplotlib.pyplot as plt
+
+def plot(x):
+    fig, ax = plt.subplots()
+    im = ax.imshow(x, cmap = 'gray')
+    ax.axis('off')  # # Hides axis
+    fig.set_size_inches(10, 10) # Adjusts figure size
+    plt.show()	
+		
+C = np.zeros((100,100)).astype(int)
+C[0,50] = 1
+plot(C)
+
+# The code prints the 8-bit binary representation of the number 90.
+# num is formatted as a binary number (b).
+# 08 ensures the output is zero-padded to 8 digits.
+		
+num = 90
+print(f'{num:08b}')
+
+rule = np.zeros((2,2,2))
+
+# The code defines a 3D NumPy array called rule with
+ dimensions (2,2,2). This structure can represent a 
+ binary cellular automaton rule, where each possible 
+ combination of three binary inputs (0s and 1s) maps 
+ to an output (0 or 1).
+		
+rule[0,0,0] = 0
+rule[0,0,1] = 1
+rule[0,1,0] = 0
+rule[0,1,1] = 1
+rule[1,0,0] = 1
+rule[1,0,1] = 0
+rule[1,1,0] = 1
+rule[1,1,1] = 0
+
+# CA function attempts to apply the cellular automaton
+  rule defined earlier to update a 2D grid X.
+def CA(X):
+
+    for i in range(1,X.shape[0]-1): #row
+        for j in range(1,X.shape[1]-1): #col
+
+            N  = X[i-1,j]
+            NW = X[i-1,j-1]
+            NE = X[i-1,j+1]
+
+            X[i,j] = rule[NW,N,NE]
+
+    return X
+		
+</code></pre>
+		
+        <figure>
+          <img
+            src="Screenshot Cellular Automata.png"
+	    alt="Cellular Automata.png"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+
+      <!-- CONCLUSION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          In this module, I learn how to graph the Cellular Automate starting from graphing a equilateral 
+	  triangle and Sierpinski triangle. It uses the similiar concept combining recursive function to 
+	  graph cellular automate with different patterns. I am fascinated those beautiful patterns and curves.
+	  I would like explore more other similiar patterns.
+	</p>
+      </section>
+
+     
+     
+     
+   
+     
+     
+     
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
