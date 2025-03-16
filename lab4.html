@@ -62,31 +62,43 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-        First, it needs to initialize the turtle. Then, it define the function to draw an euquilatral triangle
-	with the "for" loop with running 3 times since a triangle has three sides. The underscore _ is used as a throwaway variable
-	as we don't need to use its value. The forward (length) is to move the turtle forward by the specified distance (length),
-	drawing one side of the triangle. The left(120) is to rotate the turtle left by 120 degrees after drwaing each side. It is 
-	because in and equilateral triangle, each exterior angle is 120 degrees, so this ensures that after drawing three sides, the 
-	turtle returns to its starting position.
+        First, it needs to initialize the turtle. Then, it define a fractal tree function with length and depth.
+	
         </p>
 	<section id="code">
 	<pre><code class="language-python">
-initializeTurtle()
-showturtle()
+def fractal_tree(length, depth):
+    if depth == 0:
+        return
+    else:
 
-# Define the function to draw an equilateral triangle
-def draw_triangle(length):
-    for _ in range(3):
         forward(length)
-        left(120)
+        left(30)
 
-# Set up the turtle
-jump(300, 500)
-face(90)
-color('green')
-length = 400
-draw_triangle(length)
+        fractal_tree(length * 0.7, depth - 1)
 
+        right(60)
+
+        fractal_tree(length * 0.7, depth - 1)
+
+        left(30)
+        backward(length)
+
+initializeTurtle(initial_window_size=(500, 500))
+
+# Set up the turtle's starting position and orientation
+jump(250, 450)  # Starting position at the bottom center of the canvas
+face(0)
+color('green')  # Set the pen color
+
+# Set the length and depth for the fractal tree
+length = 100  # Initial length of the main trunk
+depth = 7     # Recursion depth (number of branching levels)
+
+# Draw the fractal tree
+fractal_tree(length, depth)
+
+# Display the drawing
 show()
 	</code></pre>
 	<figure>
