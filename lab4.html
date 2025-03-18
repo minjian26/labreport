@@ -63,7 +63,11 @@
         <h2>Results &amp; Analysis</h2>
         <p>
         First, it needs to initialize the turtle. Then, it define a fractal tree function with length and depth.
-	
+	Setting "if" command, it is to input certain parameters for length and depth if depth == 0. Next, set up 
+	the turtle's starting position and orientation. The starting position at the bottom center of the canvas
+	Then, set the length and depth for the fractal tree. After initialing length of the main trunk and Recursion
+	depth which is number of branching levels, finally the fractal tree is displayed. 
+
         </p>
 	<section id="code">
 	<pre><code class="language-python">
@@ -86,15 +90,13 @@ def fractal_tree(length, depth):
 
 initializeTurtle(initial_window_size=(500, 500))
 
-# Set up the turtle's starting position and orientation
-jump(250, 450)  # Starting position at the bottom center of the canvas
+jump(250, 450)  
 face(0)
 color('green')  # Set the pen color
 
-# Set the length and depth for the fractal tree
-length = 100  # Initial length of the main trunk
-depth = 7     # Recursion depth (number of branching levels)
-
+length = 100  
+depth = 7    
+		
 # Draw the fractal tree
 fractal_tree(length, depth)
 
@@ -114,41 +116,42 @@ show()
 
 		
 	<p>
-	Second, I learn how to graph a Sierpinski triangle. It starts with defining the recursive Sierpinski triangle function.
-	If order == 0, it calls draw_triangle(length), which should draw a basic triangle. Otherwise, it recursively calls 
-	itself three times to form the Sierpinski triangle structure. The turtle moves forward and backward, rotating to 
-	correctly position the sub-triangles. Then, initializeTurtle(), showturtle(), jump(), face(), and color('green') 
-	are likely custom functions for setting up the turtle. Next, it draws the Sierpinski triangle. 
+	Further, I learn to draw fractal tree with many branchers by extending the previous code. Similiarly, it needs to
+	define a function. However, the function need to include the branch length, shorten by, and angle. If the branch 
+	length is greater than 3, then it moves forward with the certain branch length. Importing the relationship 
+	between the branch length and shorten by, the new length = branch length - shorten by. Then, angle is changed to left
+	and right. It is continued to build tree. Then, it is to set up the turtle's starting position and orientation. By
+	imputting three parameters, it finally displays the fractal tree. 
+	
 	</p>
 	<section id="code">
 	<pre><code class="language-python">
+def build_tree(branch_length, shorten_by, angle):
+    if branch_length > 3:
 
-def sierpinski_triangle(length, order):
-    if order == 0:
-        draw_triangle(length)
-    else:
-        sierpinski_triangle(length / 2, order - 1)
-        forward(length / 2)
-        sierpinski_triangle(length / 2, order - 1)
-        backward(length / 2)
-        left(60)
-        forward(length / 2)
-        right(60)
-        sierpinski_triangle(length / 2, order - 1)
-        left(60)
-        backward(length / 2)
-        right(60)
+        forward(branch_length)
 
-initializeTurtle()
-showturtle()
+        new_length = branch_length - shorten_by
 
-jump(300, 500)  # moves the turtle to the starting position.
-face(90)     # sets the turtle direction.   
-color('green')   # color('green') changes the drawing color.
+        left(angle)
 
-length = 400
-order = 4
-sierpinski_triangle(length, order)
+        build_tree(new_length, shorten_by, angle)
+
+        right(angle * 2)
+
+        build_tree(new_length, shorten_by, angle)
+
+        left(angle)
+
+        backward(branch_length)
+
+initializeTurtle(initial_window_size=(800, 800))
+
+jump(400, 600)  
+face(0)
+color('green') 
+
+build_tree(80, 8, 25)
 
 show()
 </code></pre>
