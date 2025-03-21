@@ -1,0 +1,195 @@
+<!-- INTRODUCTION SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<html>
+<head> <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="stylesheet" href="https://latex.vercel.app/style.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"/><script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+
+<title>Fractal Geometry Lab Report</title>
+
+</head>
+	
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry Lab Report</h1>
+    <p class="author">
+      [Minjian You] <br />
+      [Feburary 28, 2025]
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          In this modules, I learn how to generating trees with turtles by importing turtle library. 
+          Starting with a function to draw a fractal tree using recursion. Then, it is set to initialize the turtle
+	  and set up a series of parameters to draw a simple fractal tree. For a prosperous fractal tree with more branches,
+	  it is defined a fractal tree function and continue setting up its parameters to make the fractal tree with many branches.
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+
+
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+        First, it needs to initialize the turtle. Then, it define a fractal tree function with length and depth.
+	Setting "if" command, it is to input certain parameters for length and depth if depth == 0. Next, set up 
+	the turtle's starting position and orientation. The starting position at the bottom center of the canvas
+	Then, set the length and depth for the fractal tree. After initialing length of the main trunk and Recursion
+	depth which is number of branching levels, finally the fractal tree is displayed. 
+
+        </p>
+	<section id="code">
+	<pre><code class="language-python">
+def fractal_tree(length, depth):
+    if depth == 0:
+        return
+    else:
+
+        forward(length)
+        left(30)
+
+        fractal_tree(length * 0.7, depth - 1)
+
+        right(60)
+
+        fractal_tree(length * 0.7, depth - 1)
+
+        left(30)
+        backward(length)
+
+initializeTurtle(initial_window_size=(500, 500))
+
+jump(250, 450)  
+face(0)
+color('green')  # Set the pen color
+
+length = 100  
+depth = 7    
+		
+# Draw the fractal tree
+fractal_tree(length, depth)
+
+# Display the drawing
+show()
+	</code></pre>
+	<figure>
+          <img
+            src="Screenshot Fractal Tree.png"
+	    alt="Fractal Tree"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+		
+	<p>
+	Further, I learn to draw fractal tree with many branchers by extending the previous code. Similiarly, it needs to
+	define a function. However, the function need to include the branch length, shorten by, and angle. If the branch 
+	length is greater than 3, then it moves forward with the certain branch length. Importing the relationship 
+	between the branch length and shorten by, the new length = branch length - shorten by. Then, angle is changed to left
+	and right. It is continued to build tree. Then, it is to set up the turtle's starting position and orientation. By
+	imputting three parameters, it finally displays the fractal tree. 
+	
+	</p>
+	<section id="code">
+	<pre><code class="language-python">
+def build_tree(branch_length, shorten_by, angle):
+    if branch_length > 3:
+
+        forward(branch_length)
+
+        new_length = branch_length - shorten_by
+
+        left(angle)
+
+        build_tree(new_length, shorten_by, angle)
+
+        right(angle * 2)
+
+        build_tree(new_length, shorten_by, angle)
+
+        left(angle)
+
+        backward(branch_length)
+
+initializeTurtle(initial_window_size=(800, 800))
+
+jump(400, 600)  
+face(0)
+color('green') 
+
+build_tree(80, 8, 25)
+
+show()
+</code></pre>
+
+	<figure>
+          <img
+            src="Screenshot Fractal Tree with many branches.png"
+	    alt="build tree"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+	
+
+      <!-- CONCLUSION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          In this module, I learn how to graph the basic fractal tree by using the graphic turtle. From simple
+	fractal tree to the tree with varied bracnes, the idea is similar. It starts with defining a function with
+	certain parameters and setting up conditions for those parameters to build the desire tree. It displays 
+	different types of fractal tree with different parameters. I am facinated abhout the different types of trees.
+	</p>
+      </section>
+
+     
+     
+     
+   
+     
+     
+     
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
