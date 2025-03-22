@@ -62,46 +62,55 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-        First, it needs to initialize the turtle. Then, it define a fractal tree function with length and depth.
-	Setting "if" command, it is to input certain parameters for length and depth if depth == 0. Next, set up 
-	the turtle's starting position and orientation. The starting position at the bottom center of the canvas
-	Then, set the length and depth for the fractal tree. After initialing length of the main trunk and Recursion
-	depth which is number of branching levels, finally the fractal tree is displayed. 
+
+
+
+		
 
         </p>
 	<section id="code">
 	<pre><code class="language-python">
-def fractal_tree(length, depth):
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set initial parameters
+x_start = 0       # Starting x-coordinate of the first bar
+x_end = 3         # Ending x-coordinate of the first bar
+y_position = 0    # Starting y-coordinate (height of the first bar)
+bar_height = 5    # Height of each bar
+spacing = 10      # Space between bars (distance downwards)
+depth = 6         # Number of levels to draw
+
+# Define a function to create the Cantor Set pattern
+def cantor_set(x_start, x_end, y_position, depth):
     if depth == 0:
-        return
-    else:
+        return []
 
-        forward(length)
-        left(30)
+    # Left and right segments for the current bar
+    left_segment = [[x_start, x_start + (x_end - x_start) / 3, y_position]]
+    right_segment = [[x_end - (x_end - x_start) / 3, x_end, y_position]]
 
-        fractal_tree(length * 0.7, depth - 1)
+    # Recursively generate segments for the next levels
+    left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 3, y_position - spacing, depth - 1)
+    right_recursive = cantor_set(x_end - (x_end - x_start) / 3, x_end, y_position - spacing, depth - 1)
 
-        right(60)
+    # Combine the current segments with the results from recursive calls
+    return left_segment + right_segment + left_recursive + right_recursive
 
-        fractal_tree(length * 0.7, depth - 1)
+# Generate Cantor Set segments data
+segments = np.array(cantor_set(x_start, x_end, y_position, depth))  # Convert to an array for easy plotting
 
-        left(30)
-        backward(length)
+# Plot the Cantor Set
+plt.figure(figsize=(25, 25))
 
-initializeTurtle(initial_window_size=(500, 500))
+# Draw each segment as a black bar
+for x_start, x_end, y in segments:
+    plt.fill_between([x_start, x_end], [y] * 2, [y - bar_height] * 2, color="black")
 
-jump(250, 450)  
-face(0)
-color('green')  # Set the pen color
+# Hide the axes for a clean look
+plt.axis('off')
+plt.show()
 
-length = 100  
-depth = 7    
-		
-# Draw the fractal tree
-fractal_tree(length, depth)
-
-# Display the drawing
-show()
 	</code></pre>
 	<figure>
           <img
