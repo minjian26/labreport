@@ -68,52 +68,50 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-
-
-
-		
-
+		To start gererating the Infinite dust, the idea is similiar with the cantor set. First, it imports 
+	libraries for math and plotting. Then, it starts setting initial parameters. The "x_start" and "x_end" represent
+	the length of the the bar with the initial point and the ending point. The "y_position is for the height of 
+	the first bar, while the "bar_height" is for the height of each bar. The "spacing" is for spaces between bars.
+	The "depth" is the number to draw. After that, it starts define a function to create the Cantor Set pattern, involving
+	the parameters of "x_start, x_end, y_position, depth," Next, it sets the left and right segments for the current bar. 
+	Then, it recursively generates segments for the next levels with the next depth. It combines the current segments with 
+	the results from recursive calls. Then, it generates Cantor Set segments data and converts to an array for easy plotting.
+	Plotting the Cantor Set and drawing each segment as a black bar are the last step. Finally, it hides the axes for a clean 
+	look to present the graph.
         </p>
+	      
 	<section id="code">
 	<pre><code class="language-python">
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Set initial parameters
-x_start = 0       # Starting x-coordinate of the first bar
-x_end = 3         # Ending x-coordinate of the first bar
-y_position = 0    # Starting y-coordinate (height of the first bar)
-bar_height = 5    # Height of each bar
-spacing = 10      # Space between bars (distance downwards)
-depth = 6         # Number of levels to draw
-
-# Define a function to create the Cantor Set pattern
+x_start = 0       
+x_end = 3         
+y_position = 0   
+bar_height = 5    
+spacing = 10      
+depth = 6       
+		
 def cantor_set(x_start, x_end, y_position, depth):
     if depth == 0:
         return []
 
-    # Left and right segments for the current bar
     left_segment = [[x_start, x_start + (x_end - x_start) / 3, y_position]]
     right_segment = [[x_end - (x_end - x_start) / 3, x_end, y_position]]
 
-    # Recursively generate segments for the next levels
     left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 3, y_position - spacing, depth - 1)
     right_recursive = cantor_set(x_end - (x_end - x_start) / 3, x_end, y_position - spacing, depth - 1)
 
-    # Combine the current segments with the results from recursive calls
     return left_segment + right_segment + left_recursive + right_recursive
 
-# Generate Cantor Set segments data
-segments = np.array(cantor_set(x_start, x_end, y_position, depth))  # Convert to an array for easy plotting
+segments = np.array(cantor_set(x_start, x_end, y_position, depth))  
 
-# Plot the Cantor Set
 plt.figure(figsize=(25, 25))
 
-# Draw each segment as a black bar
+
 for x_start, x_end, y in segments:
     plt.fill_between([x_start, x_end], [y] * 2, [y - bar_height] * 2, color="black")
 
-# Hide the axes for a clean look
 plt.axis('off')
 plt.show()
 
