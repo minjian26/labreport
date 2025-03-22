@@ -125,58 +125,6 @@ plt.show()
             loading="lazy"
           />
         </figure>
-
-		
-	<p>
-	Further, I learn to draw fractal tree with many branchers by extending the previous code. Similiarly, it needs to
-	define a function. However, the function need to include the branch length, shorten by, and angle. If the branch 
-	length is greater than 3, then it moves forward with the certain branch length. Importing the relationship 
-	between the branch length and shorten by, the new length = branch length - shorten by. Then, angle is changed to left
-	and right. It is continued to build tree. Then, it is to set up the turtle's starting position and orientation. By
-	imputting three parameters, it finally displays the fractal tree. 
-	
-	</p>
-	<section id="code">
-	<pre><code class="language-python">
-def build_tree(branch_length, shorten_by, angle):
-    if branch_length > 3:
-
-        forward(branch_length)
-
-        new_length = branch_length - shorten_by
-
-        left(angle)
-
-        build_tree(new_length, shorten_by, angle)
-
-        right(angle * 2)
-
-        build_tree(new_length, shorten_by, angle)
-
-        left(angle)
-
-        backward(branch_length)
-
-initializeTurtle(initial_window_size=(800, 800))
-
-jump(400, 600)  
-face(0)
-color('green') 
-
-build_tree(80, 8, 25)
-
-show()
-</code></pre>
-
-	<figure>
-          <img
-            src="Screenshot Fractal Tree with many branches.png"
-	    alt="build tree"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-        </figure>
 	
 
       <!-- CONCLUSION SECTION -->
@@ -187,10 +135,7 @@ show()
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>
-          In this module, I learn how to graph the basic fractal tree by using the graphic turtle. From simple
-	fractal tree to the tree with varied bracnes, the idea is similar. It starts with defining a function with
-	certain parameters and setting up conditions for those parameters to build the desire tree. It displays 
-	different types of fractal tree with different parameters. I am facinated abhout the different types of trees.
+          In this module, I learn how to graph the basic fractal tree by using the graphic turtle. 
 	</p>
       </section>
 
