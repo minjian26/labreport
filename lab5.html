@@ -126,6 +126,23 @@ plt.show()
           />
         </figure>
 	
+	<p>
+		I adjust the code, where the left_segment and right_segment are divided by 4. Thus, the bar is spitted
+	by four. From the screenshot, it can be seen that they are spiltted a little far apart as they are spiltted by
+	four instead of three.
+    left_segment = [[x_start, x_start + (x_end - x_start) / 4, y_position]]
+    right_segment = [[x_end - (x_end - x_start) / 4, x_end, y_position]]
+    left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 4, y_position - spacing, depth - 1)
+    right_recursive = cantor_set(x_end - (x_end - x_start) / 4, x_end, y_position - spacing, depth - 1)	
+	</p>
+
+	<figure>
+          <img
+            src=""
+          />
+        </figure>
+
+		
 
       <!-- CONCLUSION SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
