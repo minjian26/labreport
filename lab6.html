@@ -1,1 +1,170 @@
+<!-- INTRODUCTION SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<html>
+<head> <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="stylesheet" href="https://latex.vercel.app/style.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"/><script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
 
+<title>Fractal Geometry Lab Report</title>
+
+</head>
+	
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry Lab Report</h1>
+    <p class="author">
+      [Minjian You] <br />
+      [March 21, 2025]
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          In this modules, I learn how to generate a Cantor Set using matplotlib. The Cantor set is set of  
+	points lying on a line segment. It is created by taking some interval, for instance [0,1], and 
+	removing the middle third (1/3, 2/3), then removing the middle third of each of the two remaining 
+	sections (1/9, 2/9) and (7/9, 8/9), then removing the middle third of the remaining four sections,
+	and so on ad infinitum. 
+	<figure>
+          <img
+            src="Screenshot Cantor Set.png"
+          />
+        </figure>	
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+
+
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+		To start gererating the Infinite dust, the idea is similiar with the cantor set. First, it imports 
+	libraries for math and plotting. Then, it starts setting initial parameters. The "x_start" and "x_end" represent
+	the length of the the bar with the initial point and the ending point. The "y_position is for the height of 
+	the first bar, while the "bar_height" is for the height of each bar. The "spacing" is for spaces between bars.
+	The "depth" is the number to draw. After that, it starts define a function to create the Cantor Set pattern, involving
+	the parameters of "x_start, x_end, y_position, depth," Next, it sets the left and right segments for the current bar. 
+	Then, it recursively generates segments for the next levels with the next depth. It combines the current segments with 
+	the results from recursive calls. Then, it generates Cantor Set segments data and converts to an array for easy plotting.
+	Plotting the Cantor Set and drawing each segment as a black bar are the last step. Finally, it hides the axes for a clean 
+	look to present the graph.
+        </p>
+	      
+	<section id="code">
+	<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+x_start = 0       
+x_end = 3         
+y_position = 0   
+bar_height = 5    
+spacing = 10      
+depth = 6       
+		
+def cantor_set(x_start, x_end, y_position, depth):
+    if depth == 0:
+        return []
+
+    left_segment = [[x_start, x_start + (x_end - x_start) / 3, y_position]]
+    right_segment = [[x_end - (x_end - x_start) / 3, x_end, y_position]]
+
+    left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 3, y_position - spacing, depth - 1)
+    right_recursive = cantor_set(x_end - (x_end - x_start) / 3, x_end, y_position - spacing, depth - 1)
+
+    return left_segment + right_segment + left_recursive + right_recursive
+
+segments = np.array(cantor_set(x_start, x_end, y_position, depth))  
+
+plt.figure(figsize=(25, 25))
+
+
+for x_start, x_end, y in segments:
+    plt.fill_between([x_start, x_end], [y] * 2, [y - bar_height] * 2, color="black")
+
+plt.axis('off')
+plt.show()
+
+	</code></pre>
+	<figure>
+          <img
+            src="Screenshot Infinite Dust .png"
+	    alt="Infinite Dust"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+	
+	<p>
+		I adjust the code, where the left_segment and right_segment are divided by 4. Thus, the bar is spitted
+	by four. From the screenshot, it can be seen that they are spiltted a little far apart as they are spiltted by
+	four instead of three.
+    	left_segment = [[x_start, x_start + (x_end - x_start) / 4, y_position]]
+    	right_segment = [[x_end - (x_end - x_start) / 4, x_end, y_position]]
+    	left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 4, y_position - spacing, depth - 1)
+    	right_recursive = cantor_set(x_end - (x_end - x_start) / 4, x_end, y_position - spacing, depth - 1)	
+	</p>
+
+	<figure>
+          <img
+            src="Screenshot Infinite Dust-4 .png"
+          />
+        </figure>
+		
+      <!-- CONCLUSION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          In this module, I learn how to use the idea of cantor set to graph the infinite set. The skillful part
+	of this code is to know the relationship between the left and right segment. Kowning their recursive relationship
+	is the key to generate this code.
+	</p>
+      </section>
+
+     
+     
+     
+   
+     
+     
+     
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
