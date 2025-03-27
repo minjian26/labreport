@@ -36,7 +36,10 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-          In this modules, I learn how to generate matrix. 
+          In this modules, I explore how to generate a 2D grid of points using numpy and matplotlib,
+	iterative transformation on a 2D grid, Julia set-like fractal and fractal pattern similiar Julia-set.
+
+		
 	<figure>
           <img
             src="Screenshot Cantor Set.png"
@@ -64,16 +67,9 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-		To start gererating the Infinite dust, the idea is similiar with the cantor set. First, it imports 
-	libraries for math and plotting. Then, it starts setting initial parameters. The "x_start" and "x_end" represent
-	the length of the the bar with the initial point and the ending point. The "y_position is for the height of 
-	the first bar, while the "bar_height" is for the height of each bar. The "spacing" is for spaces between bars.
-	The "depth" is the number to draw. After that, it starts define a function to create the Cantor Set pattern, involving
-	the parameters of "x_start, x_end, y_position, depth," Next, it sets the left and right segments for the current bar. 
-	Then, it recursively generates segments for the next levels with the next depth. It combines the current segments with 
-	the results from recursive calls. Then, it generates Cantor Set segments data and converts to an array for easy plotting.
-	Plotting the Cantor Set and drawing each segment as a black bar are the last step. Finally, it hides the axes for a clean 
-	look to present the graph.
+		To start gererating a 2D grid of points, it is imported the "numpy" and "matplotlip." Then, it
+	is to gererate the size of the grid with x and y coordinates. The 'size' number of points between -1 and 1.
+	Then, create the visualization of the grid of points. 
         </p>
 	      
 	<section id="code">
@@ -81,36 +77,26 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-x_start = 0       
-x_end = 3         
-y_position = 0   
-bar_height = 5    
-spacing = 10      
-depth = 6       
+def generate_grid(size):
+    x = np.linspace(-1, , size)  
+    y = np.linspace(-1, 1, size)
+    grid = np.meshgrid(x, y) 
+    return grid
 		
-def cantor_set(x_start, x_end, y_position, depth):
-    if depth == 0:
-        return []
+def plot_grid(grid):
+    x_grid, y_grid = grid
+    plt.figure(figsize=(10, 10))
+    plt.scatter(x_grid, y_grid, s=1, color='blue')  # Plot the grid points
+    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
+    plt.show()
 
-    left_segment = [[x_start, x_start + (x_end - x_start) / 3, y_position]]
-    right_segment = [[x_end - (x_end - x_start) / 3, x_end, y_position]]
+# Set the size of the grid
+size = 50  # You can adjust this to make the grid denser or sparser
 
-    left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 3, y_position - spacing, depth - 1)
-    right_recursive = cantor_set(x_end - (x_end - x_start) / 3, x_end, y_position - spacing, depth - 1)
-
-    return left_segment + right_segment + left_recursive + right_recursive
-
-segments = np.array(cantor_set(x_start, x_end, y_position, depth))  
-
-plt.figure(figsize=(25, 25))
-
-
-for x_start, x_end, y in segments:
-    plt.fill_between([x_start, x_end], [y] * 2, [y - bar_height] * 2, color="black")
-
-plt.axis('off')
-plt.show()
-
+# Generate and plot the grid
+grid = generate_grid(size)
+plot_grid(grid)
+	
 	</code></pre>
 	<figure>
           <img
