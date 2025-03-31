@@ -40,11 +40,7 @@
 	iterative transformation on a 2D grid, Julia set-like fractal and fractal pattern similiar Julia-set.
 
 		
-	<figure>
-          <img
-            src="Screenshot Cantor Set.png"
-          />
-        </figure>	
+	
         </p>
       </section>
 
@@ -93,7 +89,7 @@ def plot_grid(grid):
     plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
     plt.show()
 
-size = 50 
+size = 20 
 
 grid = generate_grid(size)
 plot_grid(grid)
@@ -101,8 +97,8 @@ plot_grid(grid)
 	</code></pre>
 	<figure>
           <img
-            src="Screenshot Infinite Dust .png"
-	    alt="Infinite Dust"
+            src="Screenshot 2D grid of points.png"
+	    alt="2D grid of points.png"
             width="600"
             height="400"
             loading="lazy"
@@ -110,15 +106,31 @@ plot_grid(grid)
         </figure>
 	
 	<p>
-		I adjust the code, where the left_segment and right_segment are divided by 4. Thus, the bar is spitted
-	by four. From the screenshot, it can be seen that they are spiltted a little far apart as they are spiltted by
-	four instead of three.
-    	left_segment = [[x_start, x_start + (x_end - x_start) / 4, y_position]]
-    	right_segment = [[x_end - (x_end - x_start) / 4, x_end, y_position]]
-    	left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 4, y_position - spacing, depth - 1)
-    	right_recursive = cantor_set(x_end - (x_end - x_start) / 4, x_end, y_position - spacing, depth - 1)	
+		Next, based on the above code, it is imported an iterative equation to create a 3D grid of points.
+	It is introduced a complex plane and set the iterative equation. It can be set the number of iterations. I 
+	try to set the number of iterations is 2. The grid of points are scattered. 
 	</p>
 
+	<section id="code">
+	<pre><code class="language-python">
+def iterative_transform(grid, iterations):
+    x_grid, y_grid = grid
+    z = x_grid + 1j * y_grid 
+    for i in range(iterations):
+        z = z ** 2 - 0.5 
+    return np.real(z), np.imag(z)
+
+# Set the number of iterations
+iterations = 2
+
+# Apply the iterative transformation
+fractal_grid = iterative_transform(grid, iterations)
+
+# Plot the fractal grid
+plot_grid(fractal_grid)
+</code></pre>
+
+		
 	<figure>
           <img
             src="Screenshot Infinite Dust-4 .png"
