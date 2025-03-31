@@ -69,7 +69,10 @@
         <p>
 		To start gererating a 2D grid of points, it is imported the "numpy" and "matplotlip." Then, it
 	is to gererate the size of the grid with x and y coordinates. The 'size' number of points between -1 and 1.
-	Then, create the visualization of the grid of points. 
+	Then, create the visualization of the grid of points. To begin with defining function of the plot_grid with
+	x grid and y grid respectively, it then plots the grid points and the title. Also, it can set the size of the 
+	grid, which it is adjusted to make the grid denser or sparser. Finally, the grid is generated and is plotted the 
+	grid. 
         </p>
 	      
 	<section id="code">
@@ -86,14 +89,12 @@ def generate_grid(size):
 def plot_grid(grid):
     x_grid, y_grid = grid
     plt.figure(figsize=(10, 10))
-    plt.scatter(x_grid, y_grid, s=1, color='blue')  # Plot the grid points
+    plt.scatter(x_grid, y_grid, s=1, color='blue') 
     plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
     plt.show()
 
-# Set the size of the grid
-size = 50  # You can adjust this to make the grid denser or sparser
+size = 50 
 
-# Generate and plot the grid
 grid = generate_grid(size)
 plot_grid(grid)
 	
