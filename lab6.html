@@ -108,7 +108,8 @@ plot_grid(grid)
 	<p>
 		Next, based on the above code, it is imported an iterative equation to create a 3D grid of points.
 	It is introduced a complex plane and set the iterative equation. It can be set the number of iterations. I 
-	try to set the number of iterations is 2. The grid of points are scattered. 
+	try to set the number of iterations is 3. The grid of points are scattered. The followings are the comparation.
+	
 	</p>
 
 	<section id="code">
@@ -121,7 +122,7 @@ def iterative_transform(grid, iterations):
     return np.real(z), np.imag(z)
 
 # Set the number of iterations
-iterations = 2
+iterations = 1
 
 # Apply the iterative transformation
 fractal_grid = iterative_transform(grid, iterations)
@@ -133,7 +134,8 @@ plot_grid(fractal_grid)
 		
 	<figure>
           <img
-            src="Screenshot Infinite Dust-4 .png"
+            src="Screenshot iterative grid of points.png"
+	    src=""
           />
         </figure>
 		
