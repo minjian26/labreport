@@ -36,7 +36,9 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-          In these modules, I am 
+          In these modules, I explored infinite complexity with generating colored mandelbrot set and Julia set.
+	These patterns fascinate me with different zoom level and color. The codes show how to generate fractal 
+	patterns and implementing their color. 
 
 		
         </p>
@@ -61,12 +63,7 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-		To start gererating a 2D grid of points, it is imported the "numpy" and "matplotlip." Then, it
-	is to gererate the size of the grid with x and y coordinates. The 'size' number of points between -1 and 1.
-	Then, create the visualization of the grid of points. To begin with defining function of the plot_grid with
-	x grid and y grid respectively, it then plots the grid points and the title. Also, it can set the size of the 
-	grid, which it is adjusted to make the grid denser or sparser. Finally, the grid is generated and is plotted the 
-	grid. 
+		Starting with mandelbrot set, 
         </p>
 	      
 	<section id="code">
@@ -74,24 +71,55 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def generate_grid(size):
-    x = np.linspace(-1, , size)  
-    y = np.linspace(-1, 1, size)
-    grid = np.meshgrid(x, y) 
-    return grid
-		
-def plot_grid(grid):
-    x_grid, y_grid = grid
-    plt.figure(figsize=(10, 10))
-    plt.scatter(x_grid, y_grid, s=1, color='blue') 
-    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
-    plt.show()
+import numpy as np
+import matplotlib.pyplot as plt
+from numba import jit
 
-size = 20 
+# JIT-optimized mandelbrot function
+@jit(nopython=True)
+def mandelbrot(c, max_iter):
+    z = 0
+    n = 0
+    while abs(z) <= 2 and n < max_iter:
+        z = z*z + c
+        n += 1
+    return n
 
-grid = generate_grid(size)
-plot_grid(grid)
-	
+# JIT-optimized mandelbrot set generator
+@jit(nopython=True)
+def mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter):
+    r1 = np.linspace(xmin, xmax, width)
+    r2 = np.linspace(ymin, ymax, height)
+    n3 = np.empty((width, height))
+
+    for i in range(width):
+        for j in range(height):
+            n3[i, j] = mandelbrot(r1[i] + 1j * r2[j], max_iter)
+
+    return n3
+
+# Parameters for the plot
+xmin, xmax, ymin, ymax = -2.0, 1.0, -1.5, 1.5
+width, height = 800, 800
+max_iter = 100
+
+# Generate the Mandelbrot Set
+n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
+# Parameters for the initial zoom level
+xmin, xmax, ymin, ymax = -0.75, -0.74, 0.1, 0.11  # Zoom into this specific area
+width, height = 800, 800  # Resolution of the image
+max_iter = 1000  # Number of iterations
+
+# Generate the Mandelbrot Set with zoom
+n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
+
+# Plotting the zoomed Mandelbrot Set
+plt.figure(figsize=(10, 10))
+plt.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap='hot')
+plt.colorbar()
+plt.title("Mandelbrot Set - Zoomed In")
+plt.show()
+	    
 	</code></pre>
 	<figure>
           <img
