@@ -1,0 +1,172 @@
+<!-- INTRODUCTION SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<html>
+<head> <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="stylesheet" href="https://latex.vercel.app/style.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"/><script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+
+<title>Fractal Geometry Lab Report</title>
+
+</head>
+	
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry Lab Report</h1>
+    <p class="author">
+      [Minjian You] <br />
+      [March 21, 2025]
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          In this modules, I explore how to generate a 2D grid of points using numpy and matplotlib,
+	iterative transformation on a 2D grid, Julia set-like fractal and fractal pattern similiar Julia-set.
+
+		
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+
+
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+		To start gererating a 2D grid of points, it is imported the "numpy" and "matplotlip." Then, it
+	is to gererate the size of the grid with x and y coordinates. The 'size' number of points between -1 and 1.
+	Then, create the visualization of the grid of points. To begin with defining function of the plot_grid with
+	x grid and y grid respectively, it then plots the grid points and the title. Also, it can set the size of the 
+	grid, which it is adjusted to make the grid denser or sparser. Finally, the grid is generated and is plotted the 
+	grid. 
+        </p>
+	      
+	<section id="code">
+	<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+def generate_grid(size):
+    x = np.linspace(-1, , size)  
+    y = np.linspace(-1, 1, size)
+    grid = np.meshgrid(x, y) 
+    return grid
+		
+def plot_grid(grid):
+    x_grid, y_grid = grid
+    plt.figure(figsize=(10, 10))
+    plt.scatter(x_grid, y_grid, s=1, color='blue') 
+    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
+    plt.show()
+
+size = 20 
+
+grid = generate_grid(size)
+plot_grid(grid)
+	
+	</code></pre>
+	<figure>
+          <img
+            src="Screenshot 2D grid of points.png"
+	    alt="2D grid of points.png"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+	
+	<p>
+		Next, based on the above code, it is imported an iterative equation to create a 3D grid of points.
+	It is introduced a complex plane and set the iterative equation. It can be set the number of iterations. I 
+	try to set the number of iterations is 3. The grid of points are scattered. The followings are the comparation.
+	
+	</p>
+
+	<section id="code">
+	<pre><code class="language-python">
+def iterative_transform(grid, iterations):
+    x_grid, y_grid = grid
+    z = x_grid + 1j * y_grid 
+    for i in range(iterations):
+        z = z ** 2 - 0.5 
+    return np.real(z), np.imag(z)
+
+# Set the number of iterations
+iterations = 1
+
+# Apply the iterative transformation
+fractal_grid = iterative_transform(grid, iterations)
+
+# Plot the fractal grid
+plot_grid(fractal_grid)
+</code></pre>
+
+		
+	<figure>
+          <img
+            src="Screenshot iterative grid of points.png"
+	
+          />
+        </figure>
+
+	<figure>
+	   <img
+	      src="Screenshot iterative points - scattered.png"
+	   />
+	</figure>
+		
+      <!-- CONCLUSION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          In this module, I learn how to create the 2D and 3D grid of points. It is interesting to see how the grid of points
+        transform by introducting iterations. By changing the number of iterations. the grid of point is gradually diverge. 
+	It is so fascinated to see the transformation of those points by adjusting its number of iterations.
+	</p>
+      </section>
+
+     
+     
+     
+   
+     
+     
+     
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
