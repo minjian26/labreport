@@ -133,29 +133,26 @@ plt.show()
         </figure>
 	
 	<p>
-		Next, based on the above code, it is imported an iterative equation to create a 3D grid of points.
-	It is introduced a complex plane and set the iterative equation. It can be set the number of iterations. I 
-	try to set the number of iterations is 3. The grid of points are scattered. The followings are the comparation.
-	
+		Next, based on the above code, it sets parameters for the initial zoom level and zoom into this specific
+	area, setting the resolution of the image and number of itrations. Then, it generates and plotts the zoomed 
+	Mandelbrot set.
 	</p>
 
 	<section id="code">
 	<pre><code class="language-python">
-def iterative_transform(grid, iterations):
-    x_grid, y_grid = grid
-    z = x_grid + 1j * y_grid 
-    for i in range(iterations):
-        z = z ** 2 - 0.5 
-    return np.real(z), np.imag(z)
+# Parameters for the initial zoom level
+xmin, xmax, ymin, ymax = -0.75, -0.74, 0.1, 0.11 
+width, height = 800, 800 
+max_iter = 1000 
 
-# Set the number of iterations
-iterations = 1
+n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
 
-# Apply the iterative transformation
-fractal_grid = iterative_transform(grid, iterations)
-
-# Plot the fractal grid
-plot_grid(fractal_grid)
+plt.figure(figsize=(10, 10))
+plt.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap='hot')
+plt.colorbar()
+plt.title("Mandelbrot Set - Zoomed In")
+plt.show()
+		
 </code></pre>
 
 		
