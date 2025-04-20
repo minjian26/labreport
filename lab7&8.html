@@ -63,7 +63,14 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-		Starting with mandelbrot set, 
+		Starting with mandelbrot set, The Mandelbrot set is a fractal — a never-ending, self-similar pattern. 
+	It’s created by applying this formula repeatedly, which is z_n+1=z^2+C. The following codes generate and zoom 
+	into the Mandelbrot set using Numba's @jit optimization for speed. This function tests whether a given complex number 
+	c is in the Mandelbrot set. It starts with z=0 and repeatedly applies z=z*z+c. If ∣z∣>2, we consider it escaped and returns
+	how many iterations it took to escape (or hits max). The Numba optimization (@jit(nopython=True)) 
+	is for performance. It is a great modular design to separate function for the set with high-resolution rendering 
+	800x800. 
+		
         </p>
 	      
 	<section id="code">
@@ -75,7 +82,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numba import jit
 
-# JIT-optimized mandelbrot function
 @jit(nopython=True)
 def mandelbrot(c, max_iter):
     z = 0
@@ -85,7 +91,6 @@ def mandelbrot(c, max_iter):
         n += 1
     return n
 
-# JIT-optimized mandelbrot set generator
 @jit(nopython=True)
 def mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter):
     r1 = np.linspace(xmin, xmax, width)
@@ -98,22 +103,18 @@ def mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter):
 
     return n3
 
-# Parameters for the plot
 xmin, xmax, ymin, ymax = -2.0, 1.0, -1.5, 1.5
 width, height = 800, 800
 max_iter = 100
 
-# Generate the Mandelbrot Set
 n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
 # Parameters for the initial zoom level
 xmin, xmax, ymin, ymax = -0.75, -0.74, 0.1, 0.11  # Zoom into this specific area
 width, height = 800, 800  # Resolution of the image
 max_iter = 1000  # Number of iterations
 
-# Generate the Mandelbrot Set with zoom
 n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
 
-# Plotting the zoomed Mandelbrot Set
 plt.figure(figsize=(10, 10))
 plt.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap='hot')
 plt.colorbar()
