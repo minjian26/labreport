@@ -157,13 +157,12 @@ plt.show()
 
 
 <p>
-	Next, it comes to the Julia set. The code is pretty sr
-
+	Next, it comes to the Julia set. The code is pretty similiar to the code of Mandelbrot set. They both use
+@jit(nopython=true) to generate the sets. In mandelbrot set, it fixes the z_0=0 and and vary the parameter c. 
+However, in Julia set, it fixes the parameter c and vary the z_0. They both use the function z_n+1=(z_n)(z_n)+c.
+The following is the code to generate Julia set.
 	
 </p>
-
-
-
 		
 
 <section id="code">
@@ -172,7 +171,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numba import jit
 
-# JIT-optimized function to generate the Julia Set
 @jit(nopython=True)
 def julia_set(c, xmin, xmax, ymin, ymax, width, height, max_iter):
     r1 = np.linspace(xmin, xmax, width)
@@ -214,7 +212,7 @@ plt.show()
 		
 	<figure>
           <img
-            src="Screenshot iterative grid of points.png"
+            src=""
 	
           />
         </figure>
