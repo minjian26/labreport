@@ -36,9 +36,9 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-          In these modules, I explored infinite complexity with generating colored mandelbrot set and Julia set.
-	These patterns fascinate me with different zoom level and color. The codes show how to generate fractal 
-	patterns and implementing their color. 
+          In this module, I explored how to use chaos games to generate Barnsley ferns and Sierpinski Triangle.
+	Next, I explored how to apply L-system rule to draw a fractal tree and generate the L-system string for 
+	the Hilbert curve with initualizing turtle.  
 
 		
         </p>
@@ -63,63 +63,39 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-		Starting with mandelbrot set, The Mandelbrot set is a fractal — a never-ending, self-similar pattern. 
-	It’s created by applying this formula repeatedly, which is z_n+1=z^2+C. The following codes generate and zoom 
-	into the Mandelbrot set using Numba's @jit optimization for speed. This function tests whether a given complex number 
-	c is in the Mandelbrot set. It starts with z=0 and repeatedly applies z=z*z+c. If ∣z∣>2, we consider it escaped and returns
-	how many iterations it took to escape (or hits max). The Numba optimization (@jit(nopython=True)) 
-	is for performance. It is a great modular design to separate function for the set with high-resolution rendering 
-	800x800. 
+		Starting with chaos game, the code is defined to the three vertices of a large equilateral triangle 
+	with a random point. At each iteration, it is picked one of the triangle's vertices randomly and move halfway
+	toward it. Then, repeating this process thousands of times, the points accumulate into the shape of the sierpinski
+	triangle.
 		
         </p>
 	      
 	<section id="code">
 	<pre><code class="language-python">
-import numpy as np
+
 import matplotlib.pyplot as plt
-
+from random import random, randint
 import numpy as np
-import matplotlib.pyplot as plt
-from numba import jit
 
-@jit(nopython=True)
-def mandelbrot(c, max_iter):
-    z = 0
-    n = 0
-    while abs(z) <= 2 and n < max_iter:
-        z = z*z + c
-        n += 1
-    return n
+def midpoint(P, Q):
+    return (0.5*(P[0] + Q[0]), 0.5*(P[1] + Q[1]))
 
-@jit(nopython=True)
-def mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter):
-    r1 = np.linspace(xmin, xmax, width)
-    r2 = np.linspace(ymin, ymax, height)
-    n3 = np.empty((width, height))
+vertices = [(0, 0), (2, 2*np.sqrt(3)), (4, 0)]
+iterates = 50000
+x, y = [0]*iterates, [0]*iterates
+x[0], y[0] = random(), random()
 
-    for i in range(width):
-        for j in range(height):
-            n3[i, j] = mandelbrot(r1[i] + 1j * r2[j], max_iter)
+for i in range(1, iterates):
 
-    return n3
+    k = randint(0, 2)
 
-xmin, xmax, ymin, ymax = -2.0, 1.0, -1.5, 1.5
-width, height = 800, 800
-max_iter = 100
+    x[i], y[i] = midpoint( vertices[k], (x[i-1], y[i-1]) )
 
-n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
-# Parameters for the initial zoom level
-xmin, xmax, ymin, ymax = -0.75, -0.74, 0.1, 0.11  # Zoom into this specific area
-width, height = 800, 800  # Resolution of the image
-max_iter = 1000  # Number of iterations
-
-n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
-
-plt.figure(figsize=(10, 10))
-plt.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap='hot')
-plt.colorbar()
-plt.title("Mandelbrot Set - Zoomed In")
-plt.show()
+plt.figure(figsize=(8, 8))
+plt.scatter(x, y, color = 'b', s=0.1)
+plt.title('Sierpinski Triangle Generated Using the Chaos Game')
+plt.axis('equal')  # Ensure aspect ratio is equal for an equilateral triangle
+plt.show()	
 	    
 	</code></pre>
 	<figure>
