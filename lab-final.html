@@ -122,28 +122,86 @@ plt.show()
         </figure>
 	
 	<p>
-		Next, based on the above code, it sets parameters for the initial zoom level and zoom into this specific
-	area, setting the resolution of the image and number of itrations. Then, it generates and plotts the zoomed 
-	Mandelbrot set.
+		Next, using the same idea above, the code is defined four transformation functions. f1
+  creates the stem. f2 creates successively smaller ferns moving up and to the right. f3 creates the leaves
+  on the right. f4 creates the leaves on the left. Then uses random.random() to probabilistically choose 
+  among the functions. Finally, generates and plots the points using matplotlib. 
+
+		
 	</p>
 
 	<section id="code">
 	<pre><code class="language-python">
-# Parameters for the initial zoom level
-xmin, xmax, ymin, ymax = -0.75, -0.74, 0.1, 0.11 
-width, height = 800, 800 
-max_iter = 1000 
+import random
+import matplotlib.pyplot as plt
 
-n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
+def f1(x, y):
+    x = 0
+    y = 0.16 * y
+    return x, y
 
-plt.figure(figsize=(10, 10))
-plt.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap='hot')
-plt.colorbar()
-plt.title("Mandelbrot Set - Zoomed In")
+def f2(x, y):
+    x_new = 0.85 * x + 0.04 * y
+    y_new = -0.04 * x + 0.85 * y + 1.6
+    return x_new, y_new
+
+def f3(x, y):
+    x_new = 0.2 * x - 0.26 * y
+    y_new = 0.23 * x + 0.22 * y + 1.6
+    return x_new, y_new
+
+def f4(x, y):
+    x_new = -0.15 * x + 0.28 * y
+    y_new = 0.26 * x + 0.24 * y + 0.44
+    return x_new, y_new
+
+# Probabilities for each function
+probabilities = [0.01, 0.85, 0.07, 0.07]
+
+# Barnsley Fern function
+def barnsley_fern(iterations):
+    x, y = 0, 0
+    points = []
+
+    for _ in range(iterations):
+        rand = random.random()
+        if rand   < sum(probabilities[:1]):
+            x, y = f1(x, y)
+        elif rand < sum(probabilities[:2]):
+            x, y = f2(x, y)
+        elif rand < sum(probabilities[:3]):
+            x, y = f3(x, y)
+        else:
+            x, y = f4(x, y)
+
+        points.append((x, y))
+
+    return points
+
+# Generate points for the Barnsley Fern
+iterations = 100000
+fern_points = barnsley_fern(iterations)
+
+# Plot the Barnsley Fern
+x_vals, y_vals = zip(*fern_points)
+plt.figure(figsize=(5, 7))
+plt.scatter(x_vals, y_vals, s=0.1, color='green')
+plt.title('Barnsley Fern')
 plt.show()
 		
 </code></pre>
 
+<figure>
+          <img
+            src=""
+	    alt=""
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+	
+		
 
 <p>
 	Next, it comes to the Julia set. The code is pretty similiar to the code of Mandelbrot set. They both use
