@@ -272,12 +272,84 @@ show()
 	<figure>
           <img
             src="Screenshot Fractal Tree2.png"
-	
           />
         </figure>
 
+	<p>
 
 		
+	</p>
+
+<section id="code">
+	<pre><code class="language-python">
+# Import necessary modules
+import math
+
+# Initialize the turtle
+initializeTurtle()
+showturtle()
+
+# Function to apply L-system rules
+def apply_rules(char, rules):
+    return rules.get(char, char)
+
+# Function to generate L-system string
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        next_string = ''.join([apply_rules(char, rules) for char in current_string])
+        current_string = next_string
+    return current_string
+
+# Function to draw the L-system with turtle
+def draw_lsystem(turtle_string, length, angle):
+    for command in turtle_string:
+        if command == 'F':
+            forward(length)
+        elif command == '+':
+            left(angle)
+        elif command == '-':
+            right(angle)
+        # 'L' and 'R' are placeholders; we ignore them in drawing
+        else:
+            pass  # Ignore other characters
+
+# Set the parameters for the Hilbert Curve
+axiom = 'L'
+rules = {
+    'L': '-RF+LFL+FR-',
+    'R': '+LF-RFR-FL+'
+}
+iterations = 5  # Adjust the iterations to change the order (e.g., 1 to 5)
+angle = 90
+
+# Generate the L-system string for the Hilbert curve
+hilbert_string = generate_lsystem(axiom, rules, iterations)
+
+# Calculate the step size based on desired size and iterations
+size = 400  # Total size of the Hilbert curve (adjust as needed)
+n = 2 ** iterations - 1
+length = size / n
+
+# Move to starting position
+jump(400, 500)  # Adjust the starting position to fit your canvas
+face(0)
+color('blue')
+
+# Draw the Hilbert curve
+draw_lsystem(hilbert_string, length, angle)
+
+# Display the drawing
+show()
+		
+	</code></pre>	
+
+	<figure>
+          <img
+            src=""
+          />
+        </figure>
+	
       <!-- CONCLUSION SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
       <!-- -------------------------------------------------------------------------------------------- -->
@@ -286,10 +358,7 @@ show()
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>
-          In this module, I learn how to create the Mandelbrot set and Julia set by using the same function varying
-	the parameters. It is interesting to see the zoom level of both sets. It facinates me to use simple codes
-	to create those fractal shapes. By computational iterations with setting their color, it is easy to be vitualize
-	the zoom level of the Mandelbort set and Julia set.
+          In this module, 
         
 	</p>
       </section>
