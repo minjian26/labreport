@@ -204,54 +204,66 @@ plt.show()
 		
 
 <p>
-	Next, it comes to the Julia set. The code is pretty similiar to the code of Mandelbrot set. They both use
-@jit(nopython=true) to generate the sets. In mandelbrot set, it fixes the z_0=0 and and vary the parameter c. 
-However, in Julia set, it fixes the parameter c and vary the z_0. They both use the function z_n+1=(z_n)(z_n)+c.
-The following is the code to generate Julia set.
+	Finally, it comes to L-system to generate fractal tree using initializeTurtle. It starts with defining functions 
+to apply L-system rules, generating L-system string and drawing the L-system with turtle. Then, it defines the L-system rule
+and generate L-system strings
 	
 </p>
 		
 
 <section id="code">
 	<pre><code class="language-python">
-import numpy as np
-import matplotlib.pyplot as plt
-from numba import jit
+initializeTurtle()
+showturtle()
 
-@jit(nopython=True)
-def julia_set(c, xmin, xmax, ymin, ymax, width, height, max_iter):
-    r1 = np.linspace(xmin, xmax, width)
-    r2 = np.linspace(ymin, ymax, height)
-    n3 = np.empty((width, height))
+def apply_rule(char, rules):
+    return rules.get(char, char)
 
-    for i in range(width):
-        for j in range(height):
-            z = r1[i] + 1j * r2[j]
-            n = 0
-            while abs(z) <= 2 and n < max_iter:
-                z = z*z + c
-                n += 1
-            n3[i, j] = n
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        current_string = ''.join([apply_rule(char, rules) for char in current_string])
+    return current_string
 
-    return n3
+def draw_lsystem(turtle_string, length, angle):
+    stack = []
+    for command in turtle_string:
+        if command == 'F':
+            forward(length)
+        elif command == '+':
+            left(angle)
+        elif command == '-':
+            right(angle)
+        elif command == '[':
+            position = (getx(), gety())
+            heading_angle = heading()
+            stack.append((position, heading_angle))
+        elif command == ']':
+            position, heading_angle = stack.pop()
+            jump(position[0], position[1])
+            face(heading_angle)
 
-# Parameters for the plot
-xmin, xmax, ymin, ymax = -1.5, 1.5, -1.5, 1.5
-width, height = 800, 800  # Image resolution
-max_iter = 256  # Number of iterations for accuracy
+# Define the L-system rules
+rules = {'F': 'FF+[+F-F-F]-[-F+F+F]'}
 
-# Choose a value for the complex constant c
-c = complex(-0.8, 0.156)
+axiom = 'F'
+iterations = 4
 
-# Generate the Julia Set
-n3 = julia_set(c, xmin, xmax, ymin, ymax, width, height, max_iter)
+# Generate the L-system string
+turtle_string = generate_lsystem(axiom, rules, iterations)
 
-# Plotting the Julia Set
-plt.figure(figsize=(10, 10))
-plt.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap='hot', interpolation='bilinear')
-plt.colorbar()
-plt.title(f"Julia Set for c = {c}")
-plt.show()
+# Set up the turtle
+jump(400, 500)
+face(0)
+color('green')
+
+# Draw the L-system fractal tree
+length = 5
+angle = 20
+draw_lsystem(turtle_string, length, angle)
+
+# Display the drawing
+show()
 
 </code></pre>	
 
@@ -259,7 +271,7 @@ plt.show()
 		
 	<figure>
           <img
-            src="Screenshot Julia Set.png"
+            src=""
 	
           />
         </figure>
