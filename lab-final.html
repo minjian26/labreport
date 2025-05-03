@@ -289,18 +289,15 @@ initial size of the square. By increasing the size of the square, it can iterate
 
 <section id="code">
 	<pre><code class="language-python">
-# Import necessary modules
+
 import math
 
-# Initialize the turtle
 initializeTurtle()
 showturtle()
 
-# Function to apply L-system rules
 def apply_rules(char, rules):
     return rules.get(char, char)
 
-# Function to generate L-system string
 def generate_lsystem(axiom, rules, iterations):
     current_string = axiom
     for _ in range(iterations):
@@ -308,7 +305,6 @@ def generate_lsystem(axiom, rules, iterations):
         current_string = next_string
     return current_string
 
-# Function to draw the L-system with turtle
 def draw_lsystem(turtle_string, length, angle):
     for command in turtle_string:
         if command == 'F':
@@ -321,39 +317,33 @@ def draw_lsystem(turtle_string, length, angle):
         else:
             pass  # Ignore other characters
 
-# Set the parameters for the Hilbert Curve
 axiom = 'L'
 rules = {
     'L': '-RF+LFL+FR-',
     'R': '+LF-RFR-FL+'
 }
-iterations = 7  # Adjust the iterations to change the order (e.g., 1 to 5)
+iterations = 7  
 angle = 90
 
-# Generate the L-system string for the Hilbert curve
 hilbert_string = generate_lsystem(axiom, rules, iterations)
 
-# Calculate the step size based on desired size and iterations
 size = 400  # Total size of the Hilbert curve (adjust as needed)
 n = 2 ** iterations - 1
 length = size / n
 
-# Move to starting position
 jump(400, 500)  # Adjust the starting position to fit your canvas
 face(0)
 color('blue')
 
-# Draw the Hilbert curve
 draw_lsystem(hilbert_string, length, angle)
 
-# Display the drawing
 show()
 		
 	</code></pre>	
 
 	<figure>
           <img
-            src=""
+            src="Screenshot Hilbert Curves.png"
           />
         </figure>
 	
