@@ -276,7 +276,14 @@ show()
         </figure>
 
 	<p>
-
+	Next, it comes to Hukbert curve. The Hilbert curve (also known as the Hilbert space-filling curve) is a 
+continuous fractal space-filling curve first described by the German mathematician David Hilbert in 1891. 
+It starts as a simple line that recursively folds to cover more space while always staying within a square boundary. 
+It's a classic application of L-systems (Lindenmayer systems). The code is implemented using L-system rule. 
+It generates the string with generate_lsystem(). Axiom: The starting string (initial state). Rules: Rewriting rules 
+for characters. Iterations: How many times to apply the rules. By adjusting the number of iteration with 7, the gaps 
+of lines become narrow. Continuing to increase the number with 8, it eventualy becomes a blue square. It depends on the 
+initial size of the square. By increasing the size of the square, it can iterate more times.
 		
 	</p>
 
@@ -320,7 +327,7 @@ rules = {
     'L': '-RF+LFL+FR-',
     'R': '+LF-RFR-FL+'
 }
-iterations = 5  # Adjust the iterations to change the order (e.g., 1 to 5)
+iterations = 7  # Adjust the iterations to change the order (e.g., 1 to 5)
 angle = 90
 
 # Generate the L-system string for the Hilbert curve
