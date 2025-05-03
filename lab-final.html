@@ -74,7 +74,6 @@
 	      
 	<section id="code">
 	<pre><code class="language-python">
-
 import matplotlib.pyplot as plt
 from random import random, randint
 import numpy as np
@@ -218,7 +217,8 @@ def apply_rule(char, rules):
 def generate_lsystem(axiom, rules, iterations):
     current_string = axiom
     for _ in range(iterations):
-        current_string = ''.join([apply_rule(char, rules) for char in current_string])
+        current_string = ''.join([apply_rule(char, rules) 
+		for char in current_string])
     return current_string
 
 def draw_lsystem(turtle_string, length, angle):
@@ -296,7 +296,8 @@ def apply_rules(char, rules):
 def generate_lsystem(axiom, rules, iterations):
     current_string = axiom
     for _ in range(iterations):
-        next_string = ''.join([apply_rules(char, rules) for char in current_string])
+        next_string = ''.join([apply_rules(char, rules) 
+		for char in current_string])
         current_string = next_string
     return current_string
 
