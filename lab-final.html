@@ -309,7 +309,7 @@ def draw_lsystem(turtle_string, length, angle):
             left(angle)
         elif command == '-':
             right(angle)
-        # 'L' and 'R' are placeholders; we ignore them in drawing
+       
         else:
             pass  # Ignore other characters
 
@@ -323,11 +323,11 @@ angle = 90
 
 hilbert_string = generate_lsystem(axiom, rules, iterations)
 
-size = 400  # Total size of the Hilbert curve (adjust as needed)
+size = 400  
 n = 2 ** iterations - 1
 length = size / n
 
-jump(400, 500)  # Adjust the starting position to fit your canvas
+jump(400, 500) 
 face(0)
 color('blue')
 
